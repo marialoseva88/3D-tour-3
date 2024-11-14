@@ -1,0 +1,141 @@
+﻿<krpano  >
+
+	<!-- startup action - load the first scene -->
+	<action name="start_compas" autorun="onstart">
+		delayedcall(0.5, 
+			add_compas(); 
+			korrect_comp(get(startcor));
+			if(compass.open_start, delayedcall(0.1,hd_sh_compass(30,1)) );
+		);
+		set(edit_compass, false);
+		if(compass.editor,  set(Edit_cmp, true);, set(Edit_cmp,false));		 
+		if(!startcor, set(startcor,0); );
+	</action>
+	
+				
+	<!-- Мишень -->	
+	<layer  name="MishenyComp1"  type="container" keep="true"  bgcapture="true" enabled="false"  align="center"  alpha="0" width="2" height="100%" zorder="99"
+			bgcolor="0xFF0000" bgalpha="1" >	
+			
+		<layer  name="MishenyComp2"  type="container" keep="true"  bgcapture="true"  align="center"  alpha="1" width="2" height="150"
+				rotate="90" bgcolor="0xFF0000" bgalpha="1" 
+		/>	
+	</layer>
+	
+	<!-- Клавиатура R - вкл-выкл редактора  set(events[FPR_key_SANComp].onkeydown,); -->
+	 <events name="FPR_key_SANComp" keep="true" 
+			onkeydown="on_off_Comp();"  
+			onviewchange="update_compass();  "
+			onnewscene="tween(layer[bg_compass_flpl].alpha, 0, 0.01); delayedcall(0.1, tween(layer[bg_compass_flpl].alpha, 1,0.5));"
+	/>
+	 
+ 	 <action name="on_off_Comp">
+		if(Edit_cmp,
+			switch(edit_compass);			
+			if(edit_compass AND keycode == 82,    <!-- Клавиатура R - вкл-выкл редактора -->
+				tween(layer[MishenyComp1].alpha, 1);	
+				tween(layer[liniya].alpha, 1);
+				showlog(true);
+				set(layer[bg_compass_flpl].enabled, true);
+				 ,
+				set(layer[MishenyComp1].alpha, 0); 
+				tween(layer[liniya].alpha, 0,0.2);
+				showlog(false);
+				set(layer[bg_compass_flpl].enabled, false);
+			);
+		 );
+	</action>
+	
+	<!-- Вкл-выкл редактора  -->
+	<action name="on_of_redaktorComp">
+			
+	</action>
+
+	
+	<!-- Хотспот пустыш --> 	 
+	<style  name="spotSM"  keep="true" edge="center" enabled="false" visible="false" maskchildren="true" /> 
+		
+		<!-- Создать слои с рисками 1 -->	
+	<action name="add_compas"> 
+	    set(korr_comp, 0);
+		set(r2,0);
+		for(set(i,1), i LE 72, inc(i),       		<!-- Шаг 5 градусов -->
+				calc(var,'compassm_' + i);
+				addhotspot(get(var));
+				calc(ath_x, i * 5 - 5);					<!-- Задаем координаты -->
+				hotspot[get(var)].loadstyle(spotSM);
+				copy(hotspot[get(var)].ath, ath_x);  
+				addlayer(get(var));
+				layer[get(var)].loadstyle(riska_compas);  
+		);
+		
+		for(set(j,0), j LE 72, add(j, 2), 
+			calc(namr, 'compassm_' + j);
+			set(layer[get(namr)].height, 5);   
+		);	
+		
+		set(layer[compasSM_1].height, 4); 			<!-- Риски над буквами короче -->
+		set(layer[compasSM_19].height, 4);
+		set(layer[compasSM_37].height, 4);
+		set(layer[compasSM_55].height, 4);
+			
+		set(layer[N].parent, layer[compassm_1]);
+		set(layer[E].parent, layer[compassm_19]);
+		set(layer[S].parent, layer[compassm_37]);
+		set(layer[W].parent, layer[compassm_55]);
+			
+		set(layer[NE].parent, layer[compassm_10]);
+		set(layer[SE].parent, layer[compassm_28]);
+		set(layer[SW].parent, layer[compassm_46]);
+		set(layer[NW].parent, layer[compassm_64]);
+	</action>
+	
+	<!-- перерисовать -->	
+	<action name="update_compass"> 
+			for(set(i,0), i LE 72, inc(i), 
+				calc(nam, 'compassm_' + i );
+				spheretoscreen(hotspot[get(nam)].ath, , h_x1, h_y); 
+				copy(layer[get(nam)].x, h_x1);	 
+				if(layer[get(nam)].x GT 0, set(layer[get(nam)].visible, true);, set(layer[get(nam)].visible, false););
+			);
+	</action>
+
+	 <!-- поправка -->	
+	<action name="korrect_comp">
+		set(startcor,%1);
+		set(korr_comp,%1);
+		korrect_comp2(%1);
+					
+	</action>		   
+			   
+    <!-- поправка -->	
+	<action name="korrect_comp2">
+		for(set(i,0), i LE 72, inc(i), 
+				txtadd(var,'compassm_',get(i));
+				calc(ath_x,i * 5 - 5 + %1);
+				set(hotspot[get(var)].ath,get(ath_x));
+			);
+		update_compass();
+	</action>
+	
+	
+	<!-- перетаскивание полосы-->		
+	<action name="draggingComp">
+		if(edit_compass,
+			copy(drag_stagex,mouse.stagex);
+		    asyncloop(pressed, 	sub(dx, mouse.stagex, drag_stagex);
+								mul(dx,0.08);		
+								add(dx2,get(korr_comp),get(dx));
+								korrect_comp2(get(dx2));
+								,
+								set(korr_comp,get(dx2));
+								roundval(dx2,2);
+								trace('korrect_comp(',get(dx2),');');
+						);
+			);
+	 </action>
+	
+</krpano>
+
+
+

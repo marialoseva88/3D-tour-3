@@ -1,0 +1,80 @@
+﻿<krpano >
+
+
+	<compass
+		open_start="true"
+		editor="true"
+	/>	
+	
+	
+	
+	<include url="compassSM_2.xml" />
+	
+		<!--  ***********************    COMPASS     ***************************  -->
+			
+	<!-- Стиль текста1 -->         		   
+	<style name="text_comp1" type="text" keep="true" edge="center" enabled="false" css="font-family:Hoves;  color:#FFFFFF; font-size:20px;"  
+		    x="1" y="18" padding="3 3"  align="lefttop" background="false"  txtshadow="1 1 5 0x000000 0.3" />
+			
+	<!-- Стиль текста2 -->         		   
+	<style name="text_Com2" type="text" enabled="false" keep="true" edge="center" css="font-family:Hoves;  color:#FFFFFF; font-size:12px;" 
+		    x="2" y="19" padding="3 3"  align="lefttop" background="false" txtshadow="1 1 5 0x000000 0.3"  />
+	
+   <!-- Риска длинная --> 
+    <style name="riska_compas" type="container" keep="true" edge="top"  width="1" height="10" zorder="40" alpha="1" enabled="false"  
+           bgcapture="true" bgcolor="0xFFFFFF" bgalpha="1" bgshadow="1 1 3 0x000000 0.5" 
+		   parent="bg_compass_flpl" />	 
+		 
+	<!-- Риска короткая --> 
+    <style name="riska_compas2" type="container" keep="true" edge="top"  width="1" height="5" zorder="40" alpha="1" enabled="false"  
+            bgcapture="true" bgcolor="0xFFFFFF" bgalpha="1" bgshadow="1 1 3 0x000000 0.5" bgroundedge="0"
+			parent="bg_compass_flpl" />	 
+	
+	<!-- compass button-->
+	<layer name="compass_button"   keep="true" align="righttop"  x="10" y="50"  url="Compass.png" width="35" height="prop"  alpha="0.8" zorder="40" rotate="0"
+		 onover="set(alpha,1);" onout="set(alpha,0.8);"
+		 onclick="if(layer[bg_compass_flpl].height LT 2, hd_sh_compass(30,1),  hd_sh_compass(0,0) ); "
+	/> 
+	
+	<!-- Фон под компас --> 	 
+	<layer name="bg_compass_flpl"  type="container" keep="true" align="top"  alpha="0.01"   y="-1" x="0"  width="100%" height="1"  maskchildren="true"  enabled="false"
+	       bgcapture="true"  bgcolor="0x555555"  bgalpha="0.0"  bgshadow="0 0 20 10 0x000000 0.0"   
+		   ondown="draggingComp();" >
+		   
+		   <layer  name="target_comp"  type="container" keep="true"  bgcapture="true"  align="center" alpha="0.0" width="1" height="150"
+				   bgcolor="0xFF0000" bgalpha="1" 
+			/>	
+	</layer>	
+ 
+		
+	<!-- N css="font-family:PPRightGrotesk;  color:#FF6F68; font-size:20px;"--> 
+    <layer name="N" style="text_comp1" parent="compassm_1" html="С"   />	 
+	<!-- E --> 
+    <layer name="E" style="text_comp1" parent="compassm_19" html="В" />	
+	<!-- S css="font-family:PPRightGrotesk;  color:#267DFF; font-size:20px;"--> 
+    <layer name="S" style="text_comp1" parent="compassm_37" html="Ю"  />	 
+    <!-- W --> 
+    <layer name="W" style="text_comp1" parent="compassm_55" html="З" />
+
+	<!-- NE --> 
+    <layer name="NE" style="text_Com2" parent="compassm_10" html="СВ" />	 
+	<!-- SE --> 
+    <layer name="SE" style="text_Com2" parent="compassm_28" html="ЮВ" />	
+	<!-- SW --> 
+    <layer name="SW" style="text_Com2" parent="compassm_46" html="ЮЗ" />	 
+    <!-- NW --> 
+    <layer name="NW" style="text_Com2" parent="compassm_64" html="СЗ" />	
+	 
+	
+
+	
+	<!-- show/hide compass-->	
+	<action name="hd_sh_compass"> 
+		tween(layer[bg_compass_flpl].height, %1); 
+		tween(layer[bg_compass_flpl].alpha, %2);
+	</action>
+	
+</krpano>
+
+
+
