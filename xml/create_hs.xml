@@ -1,0 +1,170 @@
+﻿<krpano>
+	
+	
+	<inf_hs
+		color="0x0047FF" 
+		style="leg"
+	/>
+	
+	<!-- стиль ножки  ic="pedestrian.png" tim_m="5 мин."  -->
+	<style name="leg" type="text" keep="false" capture="get:edhs.edit" edge="bottom"  width="2" height="50" html="" alpha="1"  zorder="49" bgcolor="get:inf_hs.color"
+			 	  onloaded="create_hs()"   title=" "  ic="" tim_m="" renderer="css3d"  ondown=" " />  
+	
+	<!-- Точка в основании ножки -->
+	<style name="point_round" type="container" keep="false" align="bottom" edge="center"  width="6" height="6" zorder="49" alpha="1" enabled="true"  handcursor="false"   
+			  bgcolor="get:inf_hs.color" bgroundedge="3" bgalpha="1.0" />		 
+			  
+	<!--  слой основа под остальное. привязан к хс -->
+	<style name="cont_pic" type="container" keep="false" align="top" edge="bottom"  width="40" height="38" zorder="50" alpha="1" enabled="true"  handcursor="false"   
+			  bgcolor="0x2BA7B5" bgcapture="false" bgroundedge="2" bgalpha="0.0" />		   
+	
+	<!--  слой  иконка на основе -->			
+	<style name="pict" type="image" keep="false" bgcapture="false" capture="false" align="center" edge="center" url="" crop="0|0|50|50"  width="prop" height="40" scale="1" alpha="1"  zorder="50"
+			   onclick=" " ondown.handheld="delayedcall(0.1, onover());" onover="onover_hs()" onout="onout_hs(*hs_nam)"   onovercrop="0|50|50|50"   hs_nam="" /> 
+				 
+	<!--  слой текст на основе -->			
+	<style name="txt_lr" type="text" keep="false" align="center" edge="left" enabled="false" bgalpha="1" alpha="0.0"  zorder="45" height="50" maskchildren="true"
+		bgcolor="0x0047FF" css="font-family:Hoves; font-size:16px; color:#ffffff;"  bgroundedge="0 15 15 0" bgborder="0" bgshadow="2 2 5 0x000000 0.0"
+		wordwrap="false" vcenter="true"  padding="5 15 5 32" html=" "  onloaded="delayedcall(0.5, copy(width1, pixelwidth); set(width, 0); );"  width1="" 
+	/>
+	
+	<!--  слой текст описания-->	
+	<style name="ic_hs" style="txt_lr" css="font-family:Hoves; font-size:10px; color:#ffffff; text-align: center; line-height: 2px;" edge="right" bgroundedge="10 0 0 10"  padding="0 28 5 5"  x="1" />
+	 
+	
+
+	<events name="gk" keep="true"
+        ondown="if(device.handheld, forall(hotspot, hs, if(hs.style == 'leg', onout_hs(*hs.name ) )));"
+    />	
+	
+	
+	<action name="create_opening_hs" autorun="onstart" > 
+		activ_inf='';
+	</action>	   
+
+
+
+ 
+	 <!-- margin-right:10px; -->
+	<action name="create_hs" scope="local" args="title" >   
+	
+		<!--  слой основа под остальное. привязан к хс -->
+		calc(osnova, caller.name + '_osn');
+		addlayer(*osnova, osn);
+		osn.loadstyle(cont_pic);
+		calc(osn.parent, 'hotspot[' + caller.name + ']'); 
+		 
+		<!--  слой  точка в основании -->
+		calc(point,  caller.name + '_point');  
+		addlayer(*point, pn);
+		pn.loadstyle(point_round); 
+		calc(pn.parent, 'hotspot[' + caller.name + ']'); 
+		
+		<!--  слой  иконка на основе -->
+		calc(piclr,  caller.name + '_pic');  
+		addlayer(*piclr, pic);
+		pic.loadstyle(pict);
+		calc(pic.parent, 'layer[' + osnova + ']'); 
+		calc(pic.url,   '%FIRSTXML%/image/' + caller.pic);
+		copy(pic.hs_nam, caller.name);
+		 
+		<!--  слой текст на основе -->
+		calc(txtlr, pic.hs_nam + '_tit');  
+		addlayer(*txtlr, tlr);
+		tlr.loadstyle(txt_lr);
+		copy(tlr.html, caller.title);
+		calc(tlr.parent, 'layer[' + osnova + ']');  
+		
+		<!--  слой  точка в основании  -->		
+		calc(ilr, pic.hs_nam + '_ic');   
+		addlayer(*ilr, lr3);
+		lr3.loadstyle(ic_hs);
+		copy(lr3.html, caller.title);
+		calc(lr3.parent, 'layer[' + osnova + ']');  
+		
+		
+		
+		<!--  В режиме редактирования точка для  изменения высоты ножки . edhs.edit в edit_athatv_hs.xml -->
+		if(edhs.edit,
+			calc(edp,  caller.name + '_edit');  
+			addlayer(*edp, pn);
+			pn.loadstyle(edit_point_round); 
+			calc(pn.parent, 'layer[' + piclr + ']'); 
+			pn.hs = caller.name;
+		);
+		
+		if(caller.ic,
+			calc(lr3.html, '[img src=[dq] image/' + caller.ic + '[dq] style=[dq]height:30px;vertical-align:middle;[dq]/] [br]' + caller.tim_m );
+			,
+			calc(lr3.html, '' );
+		 );
+		
+	</action>
+	
+	
+	
+	
+	<action name="onover_hs"  scope="local" args="title">
+		caller.crop = caller.onovercrop; 
+		
+		calc(tlr, caller.hs_nam + '_tit'); 
+		tween(layer[*tlr].alpha, 1, 0.3);
+		copy(width1, layer[*tlr].width1); 
+		tween(layer[*tlr].width, *width1, 0.3);
+		
+		pit = caller.hs_nam; 
+		//if(hotspot[*pit].ic,
+			calc(ihs, caller.hs_nam + '_ic');  
+			tween(layer[*ihs].alpha, 1, 0.3);
+			copy(width1, layer[*ihs].width1);
+			tween(layer[*ihs].width, *width1, 0.3);
+		//);
+		
+		set(hotspot[*caller.hs_nam].zorder, 60);
+	</action>
+	
+	<action name="onout_hs"  scope="local" args="namhs">  
+		calc(piclr, namhs + '_pic');  
+		copy(lr, layer[*piclr]);
+		set(lr.crop, '0|0|50|50'); 
+		calc(ths, namhs + '_tit');
+		calc(ihs, namhs + '_ic');
+		 
+		tween(layer[*ths].alpha, 0, 0.3);
+		tween(layer[*ths].width, 0, 0.3);
+		 
+		tween(layer[*ihs].alpha, 0, 0.3);
+		tween(layer[*ihs].width, 0, 0.3);
+		 
+		 set(hotspot[*namhs].zorder, 50);
+	</action>
+	 
+	 
+	 
+	
+
+	<!--   ///////////    Редактирование  растягивание ножки    ///////////// --> 
+	
+	<!-- Точка редактирования для растягивания ножки - красная -->
+	<style name="edit_point_round" type="container" keep="false" align="center"  width="12" height="12" zorder="51" alpha="0.2" enabled="true"  handcursor="false"  bgcolor="0xff0000" bgalpha="1.0" bgroundedge="6" bgcapture="true" onover="set(alpha, 1); " onout="set(alpha, 0.2);"  hs=""  ondown="drag_width()" />		
+	
+	
+	
+	<!-- Изменить высоту ножки -->
+	<action name="drag_width" scope="local"  >    
+		if(edhs.edit, 
+			hs = hotspot[*caller.hs];
+			asyncloop(caller.pressed, 
+				hs.height += -mouse.dy;
+				clamp(hs.height, 1, 1000);
+				,
+				 ed_js.teg_hs(*caller.hs);  
+			);
+		 );
+	</action>
+	
+	
+	
+</krpano>
+	
+	

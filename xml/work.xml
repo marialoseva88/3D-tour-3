@@ -1,0 +1,91 @@
+﻿<krpano>
+	  
+ 
+	<layer name="logo" type="image" keep="true"  url="%FIRSTXML%/image/logo.png"   x="10" y="50" width="150"  x.mobile="5" y.mobile="50" width.mobile="100" height="prop"  alpha="1"  zorder="50"
+			 	onhover="" onloaded=" " onclick=" " onover="" onout="" enabled="false" /> 
+	
+	<layer name="logo2" type="image" keep="true" align="leftbottom" url="%FIRSTXML%/image/logo2.png"   x="0" y="0" width="150"  x.mobile="5" y.mobile="50" width.mobile="100" height="prop"  alpha="1"  zorder="50"
+			 	onhover="" onloaded=" " onclick=" " onover="" onout="" enabled="false" /> 
+				
+	  
+ 		
+	 	
+	
+ 	
+	<style name="butt_menu_r"  type="image" zorder="50" scale="0.7" alpha="0.5" onover="tween(alpha, 1); " onout="tween(alpha, 0.5);"  />   
+		 
+	
+	
+ 
+	<!-- ////  + -   ///   -->
+	
+	<layer  name="container_plus_minus"  type="container" keep="true" align="right"  x="10" y="0"  handcursor="false" bg="true" bgalpha="0.2"  bgcolor="0x333333" bgblur="10"  bgroundedge="15" flowchildren="v" flowoverflow="true" childmargin="25 20" childflowspacing="20" flowspacing="0" >	
+		<!-- план --> 
+		<layer name="open_plan" style="butt_menu_r" url="%FIRSTXML%/image/plan_button.png"  onclick="if(!layer[cont_fp_all].enabled,open_flpl(),close_flpl())"   />   	 	
+		<!-- + --> 
+		<layer name="plus" style="butt_menu_r" url="%FIRSTXML%/image/plus.png"  ondown="set(fov_moveforce,-1);" onup="set(fov_moveforce,0);" />  		
+		<!--  -  -->
+		<layer name="minus" style="butt_menu_r"  url="%FIRSTXML%/image/minus.png" ondown="set(fov_moveforce,1);"     onup="set(fov_moveforce,0);"  />  		
+		 <!-- fullscreen --> 
+		<layer name="fullscr" style="butt_menu_r" url="%FIRSTXML%/image/fs.png"  onclick="switch(fullscreen);"   />  
+	</layer>
+	
+	
+	
+	<action name="tab_start" autorun="onstart">
+		delayedcall(1, events_sc_m=true);
+	</action>
+	
+	 <!-- в меню на клик кнопок events_sc_m=false; delayedcall(0.2, events_sc_m=true;) - иначе глюк -->
+	<events name="men2" keep="true" 
+		onnewscene="if(events_sc_m, hid_show_butt_m()); " 	
+	/>
+	
+	<!-- показать активную кнопку при загрузке панорамы -->
+	<action name="hid_show_butt_m"  scope="local"  args="name" > 
+		trace(xml.scene);
+		
+		if(xml.scene == 'scene_1',
+			lin_text();	
+			hid_show_butt(butt_1_cont);
+		); 
+		
+		if(xml.scene == 'scene_1_1_15',
+			lin_text(butt_2_t1);	
+			if(!layer[butt_2_cont].activ ,
+				hid_show_butt(butt_2_cont);
+			);
+		); 
+		
+		if(xml.scene == 'scene_1_2_15',
+			lin_text(butt_3_t1);	
+			if(!layer[butt_3_cont].activ ,
+				hid_show_butt(butt_3_cont);
+			);
+		); 
+		
+		if(xml.scene == 'scene_1_3_15',
+			lin_text(butt_4_t1);	
+			if(!layer[butt_4_cont].activ ,
+				hid_show_butt(butt_4_cont);
+			);
+		); 
+		
+		if(xml.scene == 'scene_1_4_15',
+			lin_text(butt_5_t1);	
+			if(!layer[butt_5_cont].activ ,
+				hid_show_butt(butt_5_cont);
+			);
+		); 
+		
+    </action>	
+	
+	<action name="loadsc" scope="local"  args="sc" >  
+		loadscene(*sc, null, KEEPMOVING, BLEND(0.5)));
+	</action>
+	
+	
+	
+</krpano>
+	
+	

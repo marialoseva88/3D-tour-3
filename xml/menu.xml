@@ -1,0 +1,287 @@
+﻿<krpano >
+    
+	 
+    <action name="start_menu_sm" autorun="onstart">
+			set(H_butt, 40);		<!-- высота кнопок -->
+			set(H_butt2, 35);		<!-- высота вложенных кнопок -->
+			set(step_b, 4);			<!-- шаг между кнопками -->
+			set(step_b2, 1);			<!-- шаг между вложенными кнопками -->
+	
+		   // showlog();
+			copy(grip, layer[slider_grip_m]);
+			copy(scrolltop_m, layer[scrolltop_m]);
+			copy(Cont_m, layer[Cont_m]);
+			
+		
+			
+			delayedcall(0.2, updatebegun_m(););
+	</action>
+	
+	<events name="menu_n" keep="true" 
+		onviewchange=" "
+		onmouseup=" "
+		onclick=" " 
+		webvr_onexitvr=""	
+		ondown=""
+		onresize="updatebegun_m()" 		
+	/>
+	
+  
+   <!--***************************** стили  ************************* --> 
+	
+	<!-- контейнер  кнопки  -->	 
+	<style name="butt_cont_m" type="container" keep="true" width="100%" height="" x="0" y="-10" align="top" edge="top" alpha="1" bgcapture="true" enabled="true" handcursor="true" bgblur="10"
+		bgcolor="0x222222"	bgborder="0 0xFFFFFF 0.8"  bgroundedge="7" bgalpha="0.0" ondown="" maskchildren="true" zorder="97"  parent="scrolltop_m"  
+		open="false" openw="30"  onover="set(bgalpha,0.0);" onout="set(bgalpha, 0.0));" onloaded="copy(height, H_butt)" />
+	
+	 <!-- контейнер под вложенные кнопки -->
+	<style name="butt_cont2_m" type="container" keep="true" width="100%" height="auto" alpha="1" bgcapture="true" handcursor="true" 
+		bgcolor="0xdddddd"	bgborder="0 0xFFFFFF 0.8"  bgroundedge="0" bgalpha="0.0" ondown="" maskchildren="true" zorder="97" 
+		flowchildren="v" flowoverflow="true" childmargin="0 " childflowspacing="0"  
+		open="false" openw="30" onloaded=""   />
+		
+	<!-- Стиль заголовка кнопки  flowspacing - расстояние между кнопками calc(flowspacing, step_b2 * 2); -->         		   
+	<style name="txt_head" type="text" keep="true" align="lefttop" x="0" y="0" enabled="true" width="100%"  oy="0" 
+			bg="true" bgcolor="0x222222" bgalpha="0.3" bgborder="false" bordercolor="0 0xFFFFFF 0.0" roundedge="0"    
+			bgshadow="0 0 0 0x000000 0.0"   txtshadow="0 0 0 0x000000 0.0" 
+			css="font-family:Verdana; color:#ffffff; font-size:14px;" padding="5 15" wordwrap="false"  vcenter="true"
+			onclick.addevent="hid_show_butt(*parent); events_sc_m=false; delayedcall(0.2, events_sc_m=true;)" 
+			onloaded="copy(height, H_butt); "    
+	/>
+	
+	<!-- стрелка  -->
+	<style name="arrow_ind" type="image" align="right" edge="center" url="picture/arrow.png"  x="15" y="0" width="12" height="prop"  alpha="1" rotate="180" 
+			  enabled="false" />
+			  
+	<!-- Стиль текста в кнопке flowspacing="5" calc(oy, -1 *  step_b2)-->         		   
+	<style name="txt_item" type="text" keep="true" align="center" x="10" y="0" enabled="true" height="" width="100%" oy="0"
+			bg="true" bgalpha="0.3" bgborder="1,0,0,0 0xcccccc 0.5" bgbordermode="inside" bgcolor="0x777777" roundedge="0" bgshadow="0 0 0 0x000000 0.0"   txtshadow="0 0 0 0x000000 0.0" 
+			css="data:csstxt1" padding="5 20" vcenter="true" wordwrap="false" onclick.addevent="lin_text(*name); events_sc_m=false; delayedcall(0.2, events_sc_m=true;) "  
+			 onover="set(bgcolor,0x333333);" onout="set(bgcolor, 0x777777));"
+			onloaded="copy(flowspacing, step_b2); copy(height, H_butt2); ;"  
+	/>
+	
+	<data name="csstxt1"><![CDATA[font-family:Verdana; color:#ffffff; font-size:14px;]]></data>
+	<data name="csstxt2"><![CDATA[font-family:Verdana; color:#ffffff; font-size:14px; text-decoration: underline solid #eeeeee; ]]></data>
+	
+ 
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+ 
+		
+	
+	<!--    /////////////////////////////    Контейнер с прокруткой и слайдером  ////////////////////////////////////////////// -->
+	
+	<layer name="on_off_m" type="image" keep="true" url="picture/arrow.png"  align="left" edge="center" x="155" y="-80" width="25" height="prop" rotate="-90" onclick="on_off_men()" />
+	
+	<layer name="Cont_m" type="container" keep="true" align="left"  width="135" height="370"  x="10" y="0" alpha="1" handcursor="false"  
+			bgborder="0 0xFFFFFF 0.0" bgshadow="0 0 0 0x000000 0.0" bg="false" bgroundedge="0" bgalpha="0.3" bgcolor="0x000000" maskchildren="false" >  
+ 
+	<!-- ************* Слайдер *************** -->	 
+		<layer name="slider_bg_m" type="container" keep="true" align="righttop" x="0" y="0" width="0" height="100%" zorder="93"  alpha="0"  bgcapture="true" bgalpha="1"
+			bgcolor="0x57606a" bgborder="0 0xFFFFFF 0.0"  bgshadow="4 4 4 0x000000 0.0" bgroundedge="0"
+			onover="if(nagata_beg_addhs !== 1,set(bgcolor,0x808c98););"  onout="if(nagata_beg_addhs !== 1,set(bgcolor,0x5e6873);, set(bgcolor,0x808c98);" >	 
+		 
+			<!-- Бегунок -->		  
+			<layer name="slider_grip_m"  type="container" keep="true" align="top"  x="0"  y="" width="100%"  height=""
+					bgcolor="0xBABABA" bgalpha="1" alpha="1"   bgcapture="true" bgroundedge="2" 
+					ondown="tween(bgalpha, 1, 0.2); copy(tekushiy_Y,y); copy(drag_stagey,mouse.stagey); dragging(); set(bgcolor, 0xFFFFFF);"
+					onover="calc(bgcolor, pressed ? 0xFFFFFF : 0xDEDEDE);"
+					onout="calc(bgcolor, pressed ? 0xFFFFFF : 0xBABABA);"
+					onup="calc(bgcolor, hovering ? 0xDEDEDE : 0xBABABA);"
+					dragging="if(pressed, 
+									   calc(delta_y, mouse.stagey - drag_stagey); 
+									   calc(new_Y, tekushiy_Y + delta_y);
+									   calc(dragy, layer[slider_bg_m].pixelheight - pixelheight);
+									   if(new_Y LT 0, set(new_Y,0));
+									   calc(new_Y2, layer[slider_bg_m].pixelheight - layer[slider_grip_m].pixelheight);
+									   if(new_Y GT new_Y2, copy(new_Y,new_Y2););
+									   copy(y, new_Y);
+									   calc(Hprop, layer[scrolltop_m].pixelheight / layer[slider_bg_m].pixelheight );
+									   mul(Hprop, new_Y);
+									   mul(Hprop, -1);
+									   if(new_Y GT 0, set(layer[scrolltop_m].y, *Hprop););
+									   delayedcall(0, dragging());
+									);"
+			/>    
+		</layer>		
+		
+		<!-- Прокрутка всех кнопок -->	
+		<layer name="scrolltop_m" url="%FIRSTXML%/plugins/scrollarea.js"  align="lefttop" handcursor="false" x="5" y="0"                           
+				direction="v" width="-15" height="" draggable="true" draggable.mobile="true" mwheel="true" 
+				overscroll="1" friction="0.9"  acceleration="0.08" momentum="0.6" onscroll="updatebegun_m();"
+				flowchildren="v" flowoverflow="true" childmargin="0" childflowspacing="7" 
+				onloaded="copy(childflowspacing, step_b)"
+		/>
+		 
+	</layer>
+
+	
+	
+	<!-- /////   Кнопки.  внутри слоя прокрутки  scrolltop_m  //// -->
+	
+	<!-- /////   1   //// --> 
+	<layer name="butt_1" style="butt_cont_m" >	
+		<layer name="butt_1_cont" style="butt_cont2_m"  > 
+			<!-- текст заголовка кнопки -->
+			<layer name="butt_1_t" style="txt_head" html="Окружение" onclick="loadsc(scene_1)" /> 
+		</layer>
+	</layer>
+	
+	<!-- /////   2   //// --> 
+	<layer name="butt_2" style="butt_cont_m" >	
+		<layer name="butt_2_cont" style="butt_cont2_m"  >
+			<!-- текст заголовка кнопки -->
+			<layer name="butt_2_t" style="txt_head" html="Корпус 1.1" onclick=" " >
+				<layer name="butt_2_arrow" style="arrow_ind" />	
+			</layer>
+			<!-- вложенный текст -->
+			<layer name="butt_2_t1" style="txt_item" html="Этаж 15" onclick="loadsc(scene_1_1_15)" />	
+			<layer name="butt_2_t2" style="txt_item" html="Этаж 20"  onclick="loadsc(scene_1_1_20)" />	
+			<layer name="butt_2_t3" style="txt_item" html="Этаж 30" onclick="loadsc(scene_1_1_30)" />	
+			<layer name="butt_2_t4" style="txt_item" html="Этаж 40"  onclick="loadsc(scene_1_1_40)" /> 
+		</layer>
+	</layer>
+	
+	<!-- /////   3   //// --> 
+	<layer name="butt_3" style="butt_cont_m" >	
+		<layer name="butt_3_cont" style="butt_cont2_m"  >
+				<!-- текст заголовка кнопки -->
+			<layer name="butt_3_t" style="txt_head" html="Корпус 1.2" onclick="" >
+				<layer name="butt_3_arrow" style="arrow_ind" />	
+			</layer>	
+			<!-- вложенный текст -->
+			<layer name="butt_3_t1" style="txt_item" html="Этаж 15" onclick="loadsc(scene_1_2_15)" />	
+			<layer name="butt_3_t2" style="txt_item" html="Этаж 20" onclick="loadsc(scene_1_2_20)" />	
+			<layer name="butt_3_t3" style="txt_item" html="Этаж 30" onclick="loadsc(scene_1_2_30)" />		
+			<layer name="butt_3_t4" style="txt_item" html="Этаж 40" onclick="loadsc(scene_1_2_40)" /> 
+		</layer>
+	</layer>	
+	
+	<!-- /////   4   //// -->  
+	<layer name="butt_4" style="butt_cont_m" >	
+		<layer name="butt_4_cont" style="butt_cont2_m"  >
+		
+			<!-- текст заголовка кнопки -->
+			<layer name="butt_4_t" style="txt_head" html="Корпус 1.3" onclick="" >
+				<layer name="butt_4_arrow" style="arrow_ind" />	
+			</layer>
+			<!-- вложенный текст -->
+			<layer name="butt_4_t1" style="txt_item" html="Этаж 15" onclick="loadsc(scene_1_3_15)" />	
+		</layer>	
+	</layer>	
+	
+	<!-- /////   5   //// -->  
+	<layer name="butt_5" style="butt_cont_m" >	
+		<layer name="butt_5_cont" style="butt_cont2_m"  >
+				<!-- текст заголовка кнопки -->
+			<layer name="butt_5_t" style="txt_head" html="Корпус 1.4" onclick="" >
+				<layer name="butt_5_arrow" style="arrow_ind" />	
+			</layer>	
+			<!-- вложенный текст -->
+			<layer name="butt_5_t1" style="txt_item" html="Этаж 15" onclick="loadsc(scene_1_4_15)" />
+			<layer name="butt_5_t2" style="txt_item" html="Этаж 20"  onclick="loadsc(scene_1_4_20)" />	 
+		</layer>	
+	</layer>	
+	
+	 
+			
+			
+			
+	<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////// --> 
+	
+	 
+		<!-- Усстановить подчеркивание по клику  on_off_m Cont_m -->		
+	<action name="on_off_men" scope="local"  args="nam" >   
+		if(layer[Cont_m].x == 10,
+			tween(layer[Cont_m].x, -160);
+			tween(layer[on_off_m].x, 15);
+			tween(layer[on_off_m].rotate, 90);
+			,
+			tween(layer[Cont_m].x, 10);
+			tween(layer[on_off_m].x, 160);
+			tween(layer[on_off_m].rotate, -90);
+		);
+	 
+    </action>	
+
+
+
+	<!-- Усстановить подчеркивание по клику -->		
+	<action name="lin_text"  scope="local"  args="nam" >  
+		for(set(i,0), i LE layer.count, inc(i),   
+			if(layer[*i].style == 'txt_item',
+				copy(layer[*i].css, data[csstxt1].content); 
+			);
+		); 
+		if(nam, copy(layer[*nam].css, data[csstxt2].content));
+    </action>	
+
+	<!-- клик по контейнеру с вложенными кнопками -  раскрыть кнопку, остальные закрыть -->		
+	<action name="hid_show_butt"  scope="local"  args="name" > 
+		copy(activ_cont_b , layer[*name]);
+		copy(butt, layer[*activ_cont_b.parent]); 				<!-- родительский слой (контейнер кнопки) -->
+		 
+		for(set(i,0), i LE layer.count, inc(i), 
+			copy(lr, layer[*i]);
+			if(lr.style == 'butt_cont_m',							<!-- Если стиль кнопки -->
+			
+				calc(txt_l, lr.name + '_t' ); 							<!--  заголовок кнопки -->
+				calc(cont_b, lr.name + '_cont' ); 					<!--  контейнер под вложенные кнопки -->
+				calc(arrow, lr.name + '_arrow' ); 				<!--  стрелка -->
+				
+				calc( H_open_b, layer[*cont_b].pixelheight + 0);
+				
+		trace(activ_cont_b.activ);
+		
+				if(lr.name == butt.name,							<!-- Если имя нажатой кнопки -->
+					if(!activ_cont_b.activ, 							<!-- Если нажатая кнопка активна -->
+						set(activ_cont_b.activ, true);
+						set(layer[*txt_l].bgalpha, 0.7); 
+						tween(butt.height, *H_open_b , 0.2); 
+						if(layer[*arrow], tween(layer[*arrow].rotate, 0, 0.2);); 
+						, 
+						set(activ_cont_b.activ, false);
+						set(layer[*txt_l ].bgalpha, 0.3);
+						tween(butt.height, *H_butt, 0.2);<!-- Если нажатая кнопка не активна -->
+						if(layer[*arrow], tween(layer[*arrow].rotate, 180, 0.2));
+					);
+					, 														<!-- Если имя не нажатой кнопки --> 
+					if(layer[*cont_b].activ, 						<!-- Если не нажатая кнопка активна -->
+						set(layer[*cont_b].activ, false);
+						set(layer[*txt_l].bgalpha, 0.3); 
+						copy(parent_b, lr.name);
+						tween(layer[*parent_b].height, *H_butt, 0.2);  
+						if(layer[*arrow], tween(layer[*arrow].rotate, 180, 0.2););
+					);
+				);
+			);
+		); 
+		//delayedcall(0.3, set_height_scroll_m());
+    </action>	
+	
+ 
+	<!-- Установить положение и высоту бегунка слайдера  -->
+    <action name="updatebegun_m">  
+		calc(prop1, Cont_m.pixelheight / scrolltop_m.pixelheight );
+		calc(H_begun_m, prop1 * layer[slider_bg_m].pixelheight); 
+		calc(prop2, grip.pixelheight / Cont_m.pixelheight);
+		calc(Y_grip, prop2 * scrolltop_m.Toverflow);                                    
+		
+		copy(grip.height, H_begun_m); 	<!-- Установить высоту бегунка слайдера -->	
+		copy(grip.y, Y_grip);      			<!-- Установить положение бегунка слайдера --> 
+		 
+		//trace(Cont_m.pixelheight, '---', scrolltop_m.pixelheight);
+		if(Cont_m.pixelheight GT scrolltop_m.pixelheight, 
+			set(layer[slider_bg_m].width, 0);
+			,
+			set(layer[slider_bg_m].width, 5);
+			set(layer[slider_bg_m].alpha, 1);
+		);
+	</action>
+	
+	
+
+	 
+</krpano>
+
+ 
