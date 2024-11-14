@@ -1,0 +1,241 @@
+﻿<krpano version="1.21" showerrors="false" logkey="false" debugmode="false" debugkeys="false" debugjsactions="false" debugjsplugins="false" >
+
+ 
+	<include url="xml/create_hs.xml" />	 
+	<include url="FloorPlan/xml/floorplan_SM.xml" /> 
+	
+	<edhs 
+		edit="false"
+		hs_style="leg" 
+		hs_style2="icon" 
+		name_tour="Андрей"
+	/> 
+	<include url="xml/work.xml" /> 	 
+	<include url="xml/menu.xml" /> 	 
+
+ 
+	
+		
+	<scene name="scene_1" title="2" autoload="true" onstart="" thumburl="panos/2.tiles/thumb.jpg" lat="-0.00000000" lng="-0.00000000" alt="254.06" heading="0.0">
+		
+		<control bouncinglimits="true" />
+
+		<view hlookat="124.869" vlookat="22.901" fovtype="MFOV" fov="95.629" maxpixelzoom="2.0" fovmin="21.016486" fovmax="140.0" limitview="auto" hlookatmin="-180.0" hlookatmax="180.0" vlookatmin="-90.0" vlookatmax="90.0"/>
+
+		<preview url="panos/2.tiles/preview.jpg" />
+
+		<image prealign="0|141.5095059329583|0">
+			<cube url="panos/2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+		 
+		<hotspot name="inf_d1" style="leg" ath="28.7625" atv="15.9654" pic="1.png" title="Дошкольная академия Da!" ic="pedestrian.png" tim_m="10 мин." />
+		<hotspot name="inf_d2" style="leg" ath="102.4461" atv="17.8477" pic="1.png" title="Детский сад ЖК Адмирал" ic="pedestrian.png" tim_m="1 мин." />
+		<hotspot name="inf_d3" style="leg" height="56" ath="13.2045" atv="18.2592" pic="1.png" title="Детский сад №1524" ic="pedestrian.png" tim_m="10 мин." />
+		<hotspot name="inf_d4" style="leg" ath="-125.8230" atv="7.4768" pic="1.png" title="Детский сад №654" ic="car.png" tim_m="15 мин." />
+		<hotspot name="inf_sh1" style="leg" height="65" ath="105.8026" atv="16.2196" pic="2.png" title="Школа ЖК Адмирал" ic="pedestrian.png" tim_m="1 мин." />
+		<hotspot name="inf_sh2" style="leg" ath="0.4670" atv="17.5334" pic="2.png" title="Школа №1524" ic="pedestrian.png" tim_m="15 мин." />
+		<hotspot name="inf_sh3" style="leg" ath="-136.5670" atv="11.1553" pic="2.png" title="Школа №654" ic="car.png" tim_m="12 мин." />
+		<hotspot name="inf_sh4" style="leg" ath="-67.6991" atv="10.2595" pic="2.png" title="Школа имени И.С. Полбина" ic="pedestrian.png" tim_m="15 мин." />
+		<hotspot name="inf_m1" style="leg" height="66" ath="-111.4679" atv="29.2138" pic="3.png" title="Метро Печатники" ic="pedestrian.png" tim_m="10 мин." />
+		<hotspot name="inf_m2" style="leg" ath="138.5777" atv="6.4840" pic="3.png" title="Метро Текстильщики" ic="car.png" tim_m="15 мин." />
+		<hotspot name="inf_aut1" style="leg" ath="106.4976" atv="2.3030" pic="4.png" title="ТТК" ic="car.png" tim_m="10 мин." />
+		<hotspot name="inf_aut2" style="leg" height="49" ath="176.5897" atv="23.8880" pic="4.png" title="ЮВХ" ic="car.png" tim_m="1 мин." />
+		<hotspot name="inf_g1" style="leg" ath="36.6176" atv="1.5352" pic="5.png" title="Парк развлечений Остров мечты" ic="car.png" tim_m="15 мин." />
+		<hotspot name="inf_g2" style="leg" height="51" ath="-101.7067" atv="4.6833" pic="5.png" title="Музей-усадьба Люблино" ic="car.png" tim_m="120 мин." />
+		<hotspot name="inf_p1" style="leg" ath="-115.8614" atv="10.0990" pic="6.png" title="Парк Шкулёва" ic="car.png" tim_m="15 мин." />
+		<hotspot name="inf_p2" style="leg" ath="-111.2322" atv="3.7239" pic="6.png" title="Люблинский парк" ic="car.png" tim_m="15 мин." />
+		<hotspot name="inf_p3" style="leg" ath="-31.3432" atv="2.7870" pic="6.png" title="Парк Печатники" ic="car.png" tim_m="10 мин." />
+		<hotspot name="inf_wat1" style="leg" ath="27.2368" atv="1.8295" pic="13.png" title="Южный речной вокзал" ic="car.png" tim_m="18 мин." />
+		<hotspot name="inf_wat2" style="leg" ath="7.4096" atv="8.3497" pic="13.png" title="Набережная Москва-реки" ic="pedestrian.png" tim_m="15 мин." />
+		<hotspot name="inf_cer1" style="leg" ath="-17.4351" atv="7.5243" pic="7.png" title="Церковь иконы Божией Матери" ic="pedestrian.png" tim_m="15 мин." />
+		<hotspot name="inf_cer2" style="leg" ath="17.6193" atv="2.9120" pic="7.png" title="Храм Спиридона Тримифунтского" ic="car.png" tim_m="15 мин." />
+		<hotspot name="inf_k1" style="leg" height="69" ath="-24.1613" atv="5.4428" pic="8.png" title="Кинотеатр Москино Тула" ic="car.png" tim_m="7 мин." />
+		<hotspot name="inf_k2" style="leg" height="73" ath="-131.4044" atv="3.0652" pic="9.png" title="Театр Своё время" ic="car.png" tim_m="15 мин." />
+		<hotspot name="inf_mag1" style="leg" ath="136.7469" atv="13.9844" pic="10.png" title="Гипермаркет METRO" ic="pedestrian.png" tim_m="10 мин." />
+		<hotspot name="inf_mag2" style="leg" ath="-6.7969" atv="29.4283" pic="10.png" title="Супермаркет Лента" ic="pedestrian.png" tim_m="10 мин." />
+		<hotspot name="inf_mag3" style="leg" ath="-72.3404" atv="21.0055" pic="10.png" title="ВкусВилл" ic="pedestrian.png" tim_m="10 мин." />
+		<hotspot name="inf_mag4" style="leg" height="52" ath="-83.0951" atv="13.8587" pic="10.png" title="Супермаркет Магнит" ic="pedestrian.png" tim_m="10 мин." />
+		<hotspot name="inf_b1" style="leg" ath="-6.6648" atv="12.1209" pic="11.png" title="Поликлинника №109" ic="pedestrian.png" tim_m="10 мин." />
+		<hotspot name="inf_f1" style="leg" height="65" ath="133.1815" atv="2.8137" pic="12.png" title="Фитнес-клуб Aquastar" ic="car.png" tim_m="7 мин." />
+
+
+	</scene>
+	
+	
+<!-- 	
+	<scene name="scene_1" title="1"  onstart="" thumburl="panos/1.tiles/thumb.jpg" lat="-0.00000000" lng="-0.00000000" alt="253.86" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1.tiles/preview.jpg" />
+
+		<image prealign="0|85.6007032323945|0">
+			<cube url="panos/1.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+		 
+
+	</scene>
+	 -->
+	
+	
+	<scene name="scene_1_1_15" title="1_1_15"  onstart=" " thumburl="panos/1_1_15.tiles/thumb.jpg" lat="55.69816886" lng="37.72525253" alt="152.38" heading="0.0">
+		
+		<control bouncinglimits="true" />
+
+		<view hlookat="145.176" vlookat="9.115" fovtype="MFOV" fov="113.870" maxpixelzoom="2.0" fovmin="21.016486" fovmax="140.0" limitview="auto" hlookatmin="-180.0" hlookatmax="180.0" vlookatmin="-90.0" vlookatmax="90.0"/>
+
+		<preview url="panos/1_1_15.tiles/preview.jpg" />
+
+		<image prealign="0|0.3664344929367189|0">
+			<cube url="panos/1_1_15.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene> 
+
+
+	<scene name="scene_1_1_20" title="1_1_20" onstart=" " thumburl="panos/1_1_20.tiles/thumb.jpg" lat="55.69822392" lng="37.72528036" alt="171.18" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1_1_20.tiles/preview.jpg" />
+
+		<image prealign="0|0.7328272234082647|0">
+			<cube url="panos/1_1_20.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_1_1_30" title="1_1_30" onstart=" " thumburl="panos/1_1_30.tiles/thumb.jpg" lat="-0.00000000" lng="-0.00000000" alt="200.68" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1_1_30.tiles/preview.jpg" />
+
+		<image prealign="0|26.9597222999858|0">
+			<cube url="panos/1_1_30.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_1_1_40" title="1_1_40" onstart=" " thumburl="panos/1_1_40.tiles/thumb.jpg" lat="-0.00000000" lng="-0.00000000" alt="231.78" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1_1_40.tiles/preview.jpg" />
+
+		<image prealign="0|-63.34168628030176|0">
+			<cube url="panos/1_1_40.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_1_2_15" title="1_2_15" onstart="" thumburl="panos/1_2_15.tiles/thumb.jpg" lat="55.69733586" lng="37.72612111" alt="151.46" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1_2_15.tiles/preview.jpg" />
+
+		<image prealign="0|63.055622926188676|0">
+			<cube url="panos/1_2_15.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_1_2_20" title="1_2_20" onstart="" thumburl="panos/1_2_20.tiles/thumb.jpg" lat="55.69735522" lng="37.72613728" alt="170.66" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1_2_20.tiles/preview.jpg" />
+
+		<image prealign="0|63.10126487568061|0">
+			<cube url="panos/1_2_20.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_1_2_30" title="1_2_30" onstart="" thumburl="panos/1_2_30.tiles/thumb.jpg" lat="55.69733511" lng="37.72619219" alt="202.66" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1_2_30.tiles/preview.jpg" />
+
+		<image prealign="0|75.24136703752384|0">
+			<cube url="panos/1_2_30.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_1_2_40" title="1_2_40" onstart="" thumburl="panos/1_2_40.tiles/thumb.jpg" lat="-0.00000000" lng="-0.00000000" alt="230.08" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1_2_40.tiles/preview.jpg" />
+
+		<image prealign="0|111.62998570931569|0">
+			<cube url="panos/1_2_40.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_1_3_15" title="1_3_15" onstart="" thumburl="panos/1_3_15.tiles/thumb.jpg" lat="55.69683061" lng="37.72503631" alt="147.26" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1_3_15.tiles/preview.jpg" />
+
+		<image prealign="0|60.01177728154829|0">
+			<cube url="panos/1_3_15.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_1_4_15" title="1_4_15" onstart="" thumburl="panos/1_4_15.tiles/thumb.jpg" lat="-0.00000000" lng="-0.00000000" alt="151.76" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1_4_15.tiles/preview.jpg" />
+
+		<image prealign="0|117.56013257391544|0">
+			<cube url="panos/1_4_15.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_1_4_20" title="1_4_20" onstart="" thumburl="panos/1_4_20.tiles/thumb.jpg" lat="-0.00000000" lng="-0.00000000" alt="171.46" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1_4_20.tiles/preview.jpg" />
+
+		<image prealign="0|74.20246728625187|0">
+			<cube url="panos/1_4_20.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1152,2304,4608" />
+		</image>
+
+	</scene>
+
+
+
+
+</krpano>
